@@ -6,22 +6,31 @@ public class BoloComponent : MonoBehaviour
 {
     [SerializeField] private bool fallen = false;
 
+    private void Start()
+    {
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.RegisterBolo();
+        }
+    }
+
     void Update()
     {
         float anguloX = transform.localEulerAngles.x;
         if (anguloX > 180f)
         {
-            anguloX -= 360f; // Ajustar valores entre -180° y 180°
+            anguloX -= 360f;
         }
-        Debug.Log("Angulo X global: " + anguloX);
 
+        float anguloRelativo = anguloX + 90f; // porque empiezan en -90º
 
-        if (!fallen && (anguloX > 45f || anguloX < -45f))
+        //Debug.Log($"{gameObject.name} -> Ángulo relativo: {anguloRelativo}");
+
+        if (!fallen && (anguloRelativo > 45f || anguloRelativo < -45f))
         {
             fallen = true;
-            Debug.Log(gameObject.name + " ha caido");
+            //Debug.Log(gameObject.name + " ha caído");
 
-            // suma bolos tirados al level manager
             if (LevelManager.Instance != null)
             {
                 LevelManager.Instance.BoloCaido();

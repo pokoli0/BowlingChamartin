@@ -1,38 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    int currentLevel;
-
     int nBolosTirados;
-    int currentTiros;
 
-    [SerializeField] int tirosMax;
     [SerializeField] int nBolos;
+    [SerializeField] TMPro.TextMeshProUGUI bolosText;
 
-    public void NextLevel()
+    public void Restart()
     {
-        currentLevel++;
+        nBolosTirados = 0;
+        UpdateTextoBolos();
 
-        // reset de nTiros
-
-        // tp
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BoloCaido()
     {
         nBolosTirados++;
-        Debug.Log("Bolos tirados: " + nBolosTirados);
+        UpdateTextoBolos();
+
+        //Debug.Log("Bolos tirados: " + nBolosTirados);
 
         if (nBolosTirados >= nBolos)
         {
             Debug.Log("Todos los bolos han caido");
-            NextLevel();
         }
+    }
+
+    public void RegisterBolo()
+    {
+        nBolos++;
+    }
+    private void UpdateTextoBolos()
+    {
+        bolosText.text = nBolosTirados.ToString();
     }
 
     private void Awake()
@@ -50,17 +57,12 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentLevel = 1;
-        currentTiros = 0;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentTiros >= tirosMax)
-        {
-            Debug.Log("tirosMaximos alcanzados");
-            NextLevel();
-        }
+
     }
 }
