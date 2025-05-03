@@ -141,7 +141,7 @@ public class LevelManager : MonoBehaviour
         dropdown.onValueChanged.AddListener(delegate { CambiarCancion(dropdown.value); });
 
         // Volumen
-        float volumenGuardado = PlayerPrefs.GetFloat("VolumenGeneral", 1f); // por defecto 1 (volumen completo)
+        float volumenGuardado = PlayerPrefs.GetFloat("VolumenGeneral", 0.5f); // por defecto 1 (volumen completo)
         volumenSlider.value = volumenGuardado; // actualiza el slider visualmente
         CambiarVolumen(volumenGuardado); // aplica el volumen
 
