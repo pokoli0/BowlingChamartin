@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] int nBolos;
     [SerializeField] TMPro.TextMeshProUGUI bolosText;
+
+    [SerializeField] TMP_InputField inputFieldNombre;
+    [SerializeField] TMPro.TextMeshProUGUI textoResultado;
 
     public void Restart()
     {
@@ -40,6 +45,12 @@ public class LevelManager : MonoBehaviour
     private void UpdateTextoBolos()
     {
         bolosText.text = nBolosTirados.ToString();
+    }
+
+    public void GuardarNombre()
+    {
+        string nombre = inputFieldNombre.text;
+        textoResultado.text = nombre;
     }
 
     private void Awake()
