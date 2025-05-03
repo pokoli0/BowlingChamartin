@@ -4555,7 +4555,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 4.76e-43, z: 6.219e-42, w: 3.95323e-40}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 7.7e-44, z: 1.4473e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4614,7 +4614,7 @@ LightProbeGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707464944}
-  m_Enabled: 0
+  m_Enabled: 1
   m_SourcePositions:
   - {x: 0.056123406, y: 1, z: 1}
   - {x: -0.8328108, y: -0.071688645, z: -1.0127324}
@@ -12612,7 +12612,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 8.59e-43, y: -4.0808144e-26, z: 8.59e-43, w: 9.1837e-41}
+  m_BoundingSphereOverride: {x: NaN, y: 6e-44, z: 7.4e-44, w: -6.0376173e+29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -15054,7 +15054,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.044629e+23, y: 0, z: 0, w: 1.05e-43}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -6.082411e+29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 1
