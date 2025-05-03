@@ -11,18 +11,24 @@ public class LevelManager : MonoBehaviour
 
     int nBolosTirados;
 
+    [Header("Bolos")]
     [SerializeField] int nBolos;
     [SerializeField] TMPro.TextMeshProUGUI bolosText;
 
+    [Header("Nombre del Jugador")]
     [SerializeField] TMP_InputField inputFieldNombre;
     [SerializeField] TMPro.TextMeshProUGUI textoResultado;
 
+    [Header("Música")]
     [SerializeField] TMP_Dropdown dropdown;
     [SerializeField] AudioSource musicaAmbiente;
     [SerializeField] AudioClip jazzMusic;
     [SerializeField] AudioClip rockMusic;
     [SerializeField] AudioClip retroMusic;
 
+    [Header("Volumen")]
+    [SerializeField] List<AudioSource> todosLosAudioSources;
+    [SerializeField] Slider volumenSlider;
     public void Restart()
     {
         // Guardar tiempo actual de la canción
@@ -85,6 +91,19 @@ public class LevelManager : MonoBehaviour
         musicaAmbiente.Play();
     }
 
+
+
+    public void CambiarVolumen(float volumen)
+    {
+        foreach (AudioSource source in todosLosAudioSources)
+        {
+            source.volume = volumen;
+        }
+
+        PlayerPrefs.SetFloat("VolumenGeneral", volumen); // guarda el volumen
+    }
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -114,6 +133,12 @@ public class LevelManager : MonoBehaviour
         }
 
         dropdown.onValueChanged.AddListener(delegate { CambiarCancion(dropdown.value); });
+
+        // Volumen
+        float volumenGuardado = PlayerPrefs.GetFloat("VolumenGeneral", 1f); // por defecto 1 (volumen completo)
+        volumenSlider.value = volumenGuardado; // actualiza el slider visualmente
+        CambiarVolumen(volumenGuardado); // aplica el volumen
+
 
         // Nombre
         if (PlayerPrefs.HasKey("NombreJugador"))
