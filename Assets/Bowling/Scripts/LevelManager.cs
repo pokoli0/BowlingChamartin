@@ -17,13 +17,23 @@ public class LevelManager : MonoBehaviour
     [SerializeField] TMP_InputField inputFieldNombre;
     [SerializeField] TMPro.TextMeshProUGUI textoResultado;
 
+    [SerializeField] TMP_Dropdown dropdown;
+    [SerializeField] AudioSource musicaAmbiente;
+    [SerializeField] AudioClip jazzMusic;
+    [SerializeField] AudioClip rockMusic;
+    [SerializeField] AudioClip retroMusic;
+
     public void Restart()
     {
+        // Guardar tiempo actual de la canción
+        PlayerPrefs.SetFloat("TiempoMusica", musicaAmbiente.time);
+
         nBolosTirados = 0;
         UpdateTextoBolos();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 
     public void BoloCaido()
     {
@@ -51,6 +61,28 @@ public class LevelManager : MonoBehaviour
     {
         string nombre = inputFieldNombre.text;
         textoResultado.text = nombre;
+
+        PlayerPrefs.SetString("NombreJugador", nombre); // Guardamos el nombre
+    }
+
+    void CambiarCancion(int index)
+    {
+        PlayerPrefs.SetInt("MusicaSeleccionada", index); //guarda la musica q estaba
+
+        switch (index)
+        {
+            case 0:
+                musicaAmbiente.clip = jazzMusic;
+                break;
+            case 1:
+                musicaAmbiente.clip = rockMusic;
+                break;
+            case 2:
+                musicaAmbiente.clip = retroMusic;
+                break;
+        }
+
+        musicaAmbiente.Play();
     }
 
     private void Awake()
@@ -68,7 +100,28 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Música
+        int musicaIndex = PlayerPrefs.GetInt("MusicaSeleccionada", 0);
+        dropdown.value = musicaIndex;
+        CambiarCancion(musicaIndex);
 
+        // Tiempo de la música
+        if (PlayerPrefs.HasKey("TiempoMusica"))
+        {
+            float tiempoMusica = PlayerPrefs.GetFloat("TiempoMusica");
+            musicaAmbiente.time = tiempoMusica;
+            musicaAmbiente.Play();
+        }
+
+        dropdown.onValueChanged.AddListener(delegate { CambiarCancion(dropdown.value); });
+
+        // Nombre
+        if (PlayerPrefs.HasKey("NombreJugador"))
+        {
+            string nombreGuardado = PlayerPrefs.GetString("NombreJugador");
+            inputFieldNombre.text = nombreGuardado;
+            textoResultado.text = nombreGuardado;
+        }
     }
 
     // Update is called once per frame
