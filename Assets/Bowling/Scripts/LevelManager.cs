@@ -29,6 +29,12 @@ public class LevelManager : MonoBehaviour
     [Header("Volumen")]
     [SerializeField] List<AudioSource> todosLosAudioSources;
     [SerializeField] Slider volumenSlider;
+
+    public int GetBolosTirados()
+    {
+        return nBolosTirados;
+    }
+
     public void Restart()
     {
         // Guardar tiempo actual de la canción
